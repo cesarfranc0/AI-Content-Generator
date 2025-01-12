@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { runAI } from "@/actions/ai";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Card, CardHeader, CardContent } from "@/components/ui/card";
 
 export default function Page() {
   // state
@@ -10,10 +11,11 @@ export default function Page() {
   const [loading, setLoading] = useState(false);
   const [query, setQuery] = useState("");
 
-  const handleClick = async () => {
+  const handleClick = async (e: any) => {
+    e.preventDefault();
     setLoading(true);
     try {
-      const data = await runAI("List the accolades of Aaron Rodgers");
+      const data = await runAI(query);
       setResponse(data);
     } catch (err) {
       console.log(err);
@@ -32,6 +34,13 @@ export default function Page() {
         />
         <Button>Generate with AI</Button>
       </form>
+
+      <Card className="mt-5">
+        <CardHeader>AI Response</CardHeader>
+        <CardContent>
+          {loading ? <div>Loading...</div> : <div>{response}</div>}
+        </CardContent>
+      </Card>
     </div>
   );
 }
