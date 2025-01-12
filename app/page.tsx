@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { runAI } from "@/actions/ai";
+import { Button } from "@/components/ui/button";
 
 export default function Page() {
   // state
@@ -20,7 +21,7 @@ export default function Page() {
   };
   return (
     <>
-      <button onClick={handleClick}>Run AI</button>
+      <Button onClick={handleClick}>Run AI</Button>
       <hr />
       <div>{loading ? "Loading..." : response}</div>
     </>
